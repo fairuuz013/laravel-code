@@ -2,6 +2,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Admin\StudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::resource('/Home', \App\Http\Controllers\HomeController::class, );
@@ -15,7 +16,12 @@ Route::prefix('admin')->group(function () {
     Route::resource('dashboard', App\Http\Controllers\Admin\DashboardController::class);
 });
 
-Route::post('action-login', [\App\Http\Controllers\LoginController::class,  'actionLogin'])->name('action-login');
+Route::post('action-login', [\App\Http\Controllers\LoginController::class, 'actionLogin'])->name('action-login');
+
+Route::get('/student', [\App\Http\Controllers\Admin\StudentController::class, 'index'])->name('student');
+Route::post('/student/simpan', [\App\Http\Controllers\Admin\StudentController::class, 'simpan']);
+Route::put('/student/hapus/{id}', [\App\Http\Controllers\Admin\StudentController::class, 'hapus']);
+Route::delete('/student/update/{id}', [\App\Http\Controllers\Admin\StudentController::class, 'update']);
 
 
 Route::get('belajar-laravel', [Admin\App\Http\Controllers\BelajarController::class, 'index']);
